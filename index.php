@@ -99,6 +99,12 @@ $query = mysql_query("select * from db_content order by id asc");
 				<br />
 				<hr>
 				<h4>Di posting oleh: <?php echo $user; ?> <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
+<?php
+// menghitung komentar
+	$komen = mysql_query("select * from db_comment where id_article=$id");
+	$jumlah_komen = mysql_num_rows($komen);
+?>
+				<h4><?php echo $jumlah_komen; ?> Comments</h4>
 			</div>
 		<?php
 				}

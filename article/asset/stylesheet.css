@@ -54,10 +54,18 @@ div {
 	border-radius: 5px;
 	color: #F5F5F5;
 	float: left;
-	position: relative;
 	padding: 15px;
 	background-color: #454545;
 
+}
+
+.article a {
+	color: #00CD66;
+	text-decoration: none;
+}
+
+.article a:hover {
+	color: #00EE76;
 }
 
 .article h2 {
@@ -98,6 +106,24 @@ div {
 	color: #00EE76;
 }
 
+.comment {
+	font-family: Arial;
+	width: 90%;
+	border-radius: 5px;
+	color: black;
+	float: left;
+	padding: 15px;
+	background-color: #FFFFFF;
+}
+
+.comment p {
+	font-size: 16px;
+}
+
+.comment_kecil {
+	font-size: 12px;
+}
+
 .footer {
 	clear: both;
 	text-align: center;
@@ -105,4 +131,13 @@ div {
 	width: 100%;
 	padding: 15px;
 	background-color: #454545;
+}
+
+.footer a {
+	color: #00CD66;
+	text-decoration: none;
+}
+
+.footer a:hover {
+	color: #00EE76;
 }
