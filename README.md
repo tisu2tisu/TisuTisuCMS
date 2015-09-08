@@ -15,6 +15,8 @@ this is list function on my cms:
 3. Article system
  - yeah, just another plugin 
 
+4. Comment System
+ - i've made it!
 
 hmm there is no so much function in my cms, but in the future i will make it better like other famous cms
 
