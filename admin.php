@@ -12,9 +12,11 @@
 	</head>
 
 	<body>
-		<h2> Admin Panel v1 user: <?php echo $_SESSION['username']; ?> 
+		<h2> Admin Panel v1
 		<div style="clear: left; float: right;"><a href="logout.php" style="text-decoration: none">Logout</a></div></h2>
-		<p><?php echo $date; ?></p>
+		<a href="index.php" target="_blank">View web </a>
+		<p> <strong>Login as</strong> <?php echo $_SESSION['username']; ?> </p>
+		<p><?php echo $date; ?> </p>
 		<table cellspacing="3" cellpadding="2" border="1">
 			<form action="add_content.php" method="post">
 				<thead>
@@ -28,6 +30,14 @@
 						<td> Nama Penulis </td>
 						<td><input style="width: 500px" type="text" name="user" /></td>
 					</tr>
+					<tr>
+						<td> Category </td>
+						<td><select style="width: 200px" name="category">
+							<option>Programming</option>
+							<option>Physics</option>
+							<option>Anime</option>
+							</select>
+						</td>
 					<tr>
 					
 					</tr>
@@ -91,6 +101,41 @@
 			?>
 			</td>
 		</tr>
+		</table>
+
+		<table cellspacing="5" cellpadding="3" width="850px" border="1" style="margin-top: 40px">
+			<thead>
+				<th>User Management</th>
+			</thead>
+			<tr>
+				<td>
+				<table cellspacing="7" align="center">
+					<thead>
+						<th>User ID </th>
+						<th>User Name </th>
+						<th>Password </th>
+						<th>E-mail </th>
+					</thead>
+			<?php
+					$query = mysql_query("select * from db_id order by id asc");
+					while($q = mysql_fetch_array($query)){
+						$id = $q['id'];
+						$username = $q['user'];
+						$password = $q['password'];
+						$email = $q['email'];
+			?>
+					<tr>
+						<td style="text-align: center"><?php echo $id; ?></td>
+						<td style="text-align: center"><?php echo $username; ?> </td>
+						<td style="text-align: center"><?php echo md5($password); ?></td>
+						<td style="text-align: center"><?php echo $email; ?> </td>
+					</tr>
+			<?php
+					}
+			?>
+				</table>
+				</td>
+			</tr>
 		</table>
 	</body>
 </html>

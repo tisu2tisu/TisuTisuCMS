@@ -10,6 +10,7 @@
 		$user = $q['user'];
 		$isi = $q['isi'];
 		$tanggal = $q['tanggal'];
+		$category = $q['category'];
 	} else {
 		die('Error : ' . mysql_query());
 	}
@@ -30,6 +31,14 @@
 					<td>Nama Penulis </td>
 					<td><input style="width: 500px" type="text" name="user" value="<?php echo $user; ?>"/></td>
 				</tr>
+				<tr>
+					<td>Category </td>
+					<td><select style="width: 200px" name="category">
+							<option>Programming</option>
+							<option>Physics</option>
+							<option>Anime</option>
+							</select>
+					</td>
 				<tr>
 					<td colspan="2"><textarea name="isi"  style="width:850px; height: 500px"><?php echo $isi; ?></textarea></td>
 				</tr>

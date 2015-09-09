@@ -1,5 +1,9 @@
 <?php
 	require('asset/mysql_con.php');
+	require_once('../pageview.php');
+	// funsi pageview
+	$pg = $_GET['id'];
+	$pquery = mysql_query("SELECT * FROM pageview WHERE page='$pg'");
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +22,28 @@
 
 			<div class="nav">
 				<ul>
-					<li><a href="javascript:history.go(-1)"> HOME </a></li>
-					<li><a href="#">Programming </a></li>
-					<li><a href="#">Physics </a></li>
-					<li><a href="#">Technology </a></li>
+					<li><a href="../index.php"> HOME </a></li>
+					<li><a href="../programming.php">Programming </a></li>
+					<li><a href="../physics.php">Physics </a></li>
+					<li><a href="../anime.php">Anime </a></li>
 				</ul>
 			</div>
-
+<?php
+// membuat halaman 404 not found
+	$id_artikel = $_GET['id'];
+	$query_cek = mysql_query("select count(id) AS jumlah from db_content where id='$id_artikel'");
+	$query_cek_db = mysql_fetch_assoc($query_cek);
+	$cek = $query_cek_db['jumlah'];
+	if($cek == 0){
+		echo "<h1 style='color: white'> 404 NOT FOUND </h1>";
+		die();
+	}
+	
+	if(empty($_GET['id']) && empty($_GET['article']) && empty($_GET['comment'])){
+		echo "<h1 style='color: white'> 404 NOT FOUND </h1>";
+		die();
+	}
+?>
 		<div class="aside_container">
 			<div class="aside">
 				<h3> Postingan Terakhir : </h3>
@@ -37,33 +56,12 @@ $query = mysql_query("select * from db_content order by id asc");
 			$data = $q['judul'];
 			$id = $q['id'];
 ?>
-	<li><a href="index.php?id=<?php echo $id; ?>&article=<?php echo str_replace(' ','-',$data); ?>"><?php echo $data; ?></a></li>
+	<li><a href="index.php?id=<?php echo $id; ?>&article=<?php echo str_replace(' ','-',$data); ?>&comment="><?php echo $data; ?></a></li>
 <?php
 			}
 		}
 ?>					
 				</ol>
-			</div>
-
-			<div class="aside">
-				<h3> have any account?<br /> you can Login in this form :</h3>
-				<table>
-					<form action="aunt_login.php/article" method="post">
-					<tr>
-						<td>Username:</td>
-						<td><input type="text" name="user" value="you cannot login. go back to homepage." disabled/></td>
-					</tr>
-
-					<tr>
-					 	<td>Password:</td>
-					 	<td><input type="password" name="pass" /></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td><input type="submit" value="Login"/></td>
-					</tr>
-					</form>
-				</table>
 			</div>
 		</div>
 <?php
@@ -78,12 +76,13 @@ $query = mysql_query("select * from db_content order by id asc");
 ?>
 		<div class="article">
 				<h2> <?php echo $judul; ?></h2>
+				<div style="font-family: Helvetica Neue; margin-bottom:30px">By <?php echo ucfirst($user); ?></div>
 				<p> 
 					<?php echo $isi; ?>
 				</p>
 				<br />
 				<hr>
-				<h4>Di posting oleh: <?php echo $user; ?> <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
+				<h4>Viewed <?php echo mysql_num_rows($pquery); ?> times <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
 				<br />
 				<br />
 				<br />
@@ -120,6 +119,12 @@ $query = mysql_query("select * from db_content order by id asc");
 					<tr>	
 						<td>Nama:</td>
 						<td><input type="text" name="nama" /></td>
+						<td><?php
+							if($_GET['comment'] == 'gagal'){
+								echo "<strong style='color: red; font-size: 15px; font-family: bookman'> *Nama sudah di ambil</strong>";
+							}
+							?>
+						</td>
 						<td><input type="hidden" name ="artikel" value="<?php echo $_GET['article']; ?>" /></td>
 					</tr>
 
@@ -127,7 +132,6 @@ $query = mysql_query("select * from db_content order by id asc");
 						<td>Email:</td>
 						<td><input type="email" name="email" /></td>
 						<td><input type="hidden" name ="id" value="<?php echo $_GET['id']; ?>" /></td>
-						<td><input type="hidden" name="tanggal" value="<?php echo date('t M H:i'); ?>" /></td>
 					</tr>
 				<table>
 					<tr>

@@ -7,7 +7,7 @@
 		if($username == $q['user'] && $password == $q['password']){
 			session_start();
 			$_SESSION['username'] = $username;
-			header('location:admin.php?value=');
+			header("location:admin.php?value='");
 		}
 	}
 	if(!$username == $q['user'] && !$password == $q['password']) {

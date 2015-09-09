@@ -3,6 +3,10 @@ html {
 	background-color: black;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
 div {
 }
 
@@ -88,6 +92,7 @@ div {
 	padding: 0px 20px 20px 20px;
 	background-color: #454545;
 }
+
 
 .aside table form{
 	background: #fff;

@@ -6,7 +6,8 @@
 	$isi = $_POST['isi'];
 	$user = $_POST['user'];
 	$id = $_POST['id'];
-	$q = "UPDATE db_content SET judul='$judul', isi='$isi', user='$user' WHERE id='$id'";
+	$category = $_POST['category'];
+	$q = "UPDATE db_content SET judul='$judul', isi='$isi', user='$user', category='$category' WHERE id='$id'";
 	// menggunakan mysql object oriented
 	$query = $mysql_con->query($q) or die(mysql_error());
 	if($query){

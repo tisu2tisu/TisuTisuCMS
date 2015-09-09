@@ -17,9 +17,9 @@
 			<div class="nav">
 				<ul>
 					<li><a href="index.php"> HOME </a></li>
-					<li><a href="#">Programming </a></li>
-					<li><a href="#">Physics </a></li>
-					<li><a href="#">Technology </a></li>
+					<li><a href="programming.php">Programming </a></li>
+					<li><a href="physics.php">Physics </a></li>
+					<li><a href="anime.php">Anime </a></li>
 				</ul>
 			</div>
 
@@ -35,7 +35,7 @@ $query = mysql_query("select * from db_content order by id asc");
 			$data = $q['judul'];
 			$data_id = $q['id'];
 ?>
-	<li><a href="article/index.php?id=<?php echo $data_id; ?>&article=<?php echo str_replace(' ','-',$data); ?>"><?php echo $data; ?></a></li>
+	<li><a href="article/index.php?id=<?php echo $data_id; ?>&article=<?php echo str_replace(' ','-',$data); ?>&comment="><?php echo $data; ?></a></li>
 <?php
 			}
 		}
@@ -73,6 +73,8 @@ $query = mysql_query("select * from db_content order by id asc");
 			$tanggal = $q['tanggal'];
 			$user = $q['user'];
 			$id = $q['id'];
+			$category = $q['category'];
+			$pquery = mysql_query("SELECT * FROM pageview WHERE page='$id'");
 
 			// function readmore
 				$string = strip_tags($isi);
@@ -90,20 +92,22 @@ $query = mysql_query("select * from db_content order by id asc");
 
 			<div class="article">
 				<h2> <?php echo $judul; ?></h2>
+				<div style="font-family: Helvetica Neue; margin-bottom:30px">By <?php echo ucfirst($user); ?></div>
 				<p> 
 					<?php echo $string; ?>
 					<br />
 					<br />
-					<a href="article/index.php?id=<?php echo $id; ?>&article=<?php echo str_replace(' ','-',$judul); ?>">Readmore </a>
+					<a href="article/index.php?id=<?php echo $id; ?>&article=<?php echo str_replace(' ','-',$judul); ?>&comment=">Readmore </a>
 				</p>
 				<br />
 				<hr>
-				<h4>Di posting oleh: <?php echo $user; ?> <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
+				<h4>Viewed <?php echo mysql_num_rows($pquery); ?> times <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
 <?php
 // menghitung komentar
 	$komen = mysql_query("select * from db_comment where id_article=$id");
 	$jumlah_komen = mysql_num_rows($komen);
 ?>
+				<h5><?php echo "Category: " . $category; ?></h4> 
 				<h4><?php echo $jumlah_komen; ?> Comments</h4>
 			</div>
 		<?php

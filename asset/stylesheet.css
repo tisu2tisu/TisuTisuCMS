@@ -3,7 +3,8 @@ html {
 	background-color: black;
 }
 
-div {
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 .header {
@@ -91,6 +92,11 @@ div {
 
 .aside table form{
 	background: #fff;
+	color: #F5F5F5;
+}
+
+.aside table tr td {
+	color: #F5F5F5;
 }
 
 .aside h3 {
