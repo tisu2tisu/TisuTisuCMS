@@ -1,4 +1,5 @@
 <?php
+	require('privilege.php');
 	require('asset/mysql_con.php');
 	$id = $_GET['id'];
 

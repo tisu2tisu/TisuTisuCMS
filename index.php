@@ -1,5 +1,6 @@
 <?php
 	require('asset/mysql_con.php');
+	session_start();
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +43,18 @@ $query = mysql_query("select * from db_content order by id asc");
 ?>					
 				</ol>
 			</div>
-
+<?php 
+// jika user telah login
+if(isset($_SESSION['username'])){
+?>
+			<div class="aside">
+				<h3> Welcome <?php echo $_SESSION['username']; ?> </h3>
+				<p><a style="text-align: center" href="admin.php?value=">Admin Page </a></p>
+			</div>
+<?php
+// jika belum login
+			} else {
+?>
 			<div class="aside">
 				<h3> have any account?<br /> you can Login in this form :</h3>
 				<table>
@@ -63,6 +75,8 @@ $query = mysql_query("select * from db_content order by id asc");
 					</form>
 				</table>
 			</div>
+<?php       } ?>
+<!-- end -->
 		</div>
 
 <?php
