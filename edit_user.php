@@ -9,8 +9,8 @@
 	<body>
 <?php
 	$user_id = $_GET['userid'];
-	$query = mysql_query("SELECT * FROM db_id WHERE id='$user_id'");
-	if($q = mysql_fetch_array($query)){
+	$query = mysqli_query($link, "SELECT * FROM db_id WHERE id='$user_id'");
+	if($q = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 		$nama = $q['user'];
 		$password = $q['password'];
 		$email = $q['email'];

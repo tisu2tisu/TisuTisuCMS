@@ -90,6 +90,7 @@ input:-webkit-autofill {
 	background-color: #454545;
 }
 
+
 .aside table form{
 	background: #fff;
 	color: #F5F5F5;
@@ -128,4 +129,38 @@ input:-webkit-autofill {
 
 .footer a:hover {
 	color: #00EE76;
+}
+
+
+ul li.list {
+	 display:inline-block;
+	 border: 1px solid black;
+	 margin: 0px 5px;
+	 padding: 3px 5px;
+	 color: #fff;
+}
+
+ul li.nolist {
+	 display:inline-block;
+	 border: 1px solid black;
+	 padding: 3px 5px;
+	 margin: 0px 5px;
+	 background-color: #000;
+	 color: #fff;
+}
+
+ul li.next {
+	 display:inline-block;
+	 border: 1px solid black;
+	 padding: 3px 5px;
+	 margin: 0px 5px;
+	 color: #fff;
+}
+
+ul li.last {
+	 display:inline-block;
+	 border: 1px solid black;
+	 padding: 3px 5px;
+	 margin: 0px 5px;
+	 color: #fff;
 }

@@ -3,8 +3,8 @@
 	require('asset/mysql_con.php');
 	require('asset/login_cek.php');
 	$date = date("l d-M-Y");
-	$q = mysql_query("select * from db_id where user='catur'");
-	$query = mysql_query("select * from db_content");
+	$q = mysqli_query($link, "select * from db_id where user='catur'");
+	$query = mysqli_query($link, "select * from db_content");
 ?>
 <html>
 	<head>
@@ -24,11 +24,11 @@
 				</thead>
 					<tr>
 						<td> Judul </td>
-						<td><input style="width: 500px" type="text" name="judul" /></td>
+						<td><input style="width: 500px" type="text" name="judul" required/></td>
 					</tr>
 					<tr>
 						<td> Nama Penulis </td>
-						<td><input style="width: 500px" type="text" name="user" /></td>
+						<td><input style="width: 500px" type="text" name="user" required /></td>
 					</tr>
 					<tr>
 						<td> Category </td>
@@ -42,7 +42,7 @@
 					
 					</tr>
 					<tr>
-						<td colspan="2"><textarea cols="5" rows="8" style="width:850px; height:380px" name="isi" >
+						<td colspan="2"><textarea cols="5" rows="8" style="width:850px; height:380px" name="isi" required >
 						</textarea>
 						</td>
 					</tr>
@@ -69,7 +69,7 @@
 			<tr>
 				<td>
 			<?php
-				while($q = mysql_fetch_array($query)){
+				while($q = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 					$judul = $q['judul'];
 					$id = $q['id'];
 					$isi = $q['isi'];
@@ -120,8 +120,8 @@
 						<th><a href="privilege_cek.php?action=tambah" style="color: #2A5DB0; text-decoration: none; font-size: 30px">+</a></th>
 					</thead>
 			<?php
-					$query = mysql_query("select * from db_id order by id asc");
-					while($q = mysql_fetch_array($query)){
+					$query = mysqli_query($link, "select * from db_id order by id asc");
+					while($q = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 						$id = $q['id'];
 						$username = $q['user'];
 						$password = $q['password'];

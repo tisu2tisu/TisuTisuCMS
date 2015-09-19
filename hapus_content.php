@@ -3,9 +3,9 @@
 	require('asset/mysql_con.php');
 	$id = $_GET['id'];
 
-	if($q = mysql_query("DELETE FROM db_content  WHERE id='$id'")){
+	if($q = mysqli_query($link, "DELETE FROM db_content  WHERE id='$id'")){
 		header('location:admin.php?value=hapus');
 	} else {
-		die('error:' . mysql_error());
+		die('error:' . mysqli_error());
 	}
 ?>

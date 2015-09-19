@@ -8,10 +8,10 @@
 	$isi = $_POST['isi'];
 	$category = $_POST['category'];
 
-	$query = mysql_query("insert into db_content values('','$judul','$isi','$tanggal','$user','$category')");
+	$query = mysqli_query($link, "insert into db_content values('','$judul','$isi','$tanggal','$user','$category')");
 	if($query){
 		header('location:admin.php?value=success');
 	} else {
-		die('gagal menambah data. <a href="admin.php?value=">Go back</a>' . mysql_error());
+		die('gagal menambah data. <a href="admin.php?value=">Go back</a>' . mysqli_error($query));
 	}
 ?>

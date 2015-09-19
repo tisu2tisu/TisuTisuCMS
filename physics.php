@@ -1,7 +1,6 @@
 <?php
 	require('asset/mysql_con.php');
-	$pg = $_GET['id'];
-	$pquery = mysql_query("SELECT * FROM pageview WHERE page='$pg'");
+	include_once("analyticstracking.php");
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +30,12 @@
 				<ol>
 <?php 
 // membuat kode posting terakhir
-$query = mysql_query("select * from db_content order by id asc");
+$query = mysqli_query($link, "select * from db_content order by id asc");
 	for($i=0; $i<3; $i++){
-		if($q = mysql_fetch_array($query)){
+		if($q = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 			$data = $q['judul'];
 			$data_id = $q['id'];
+
 ?>
 	<li><a href="article/index.php?id=<?php echo $data_id; ?>&article=<?php echo str_replace(' ','-',$data); ?>&comment="><?php echo $data; ?></a></li>
 <?php
@@ -68,17 +68,18 @@ $query = mysql_query("select * from db_content order by id asc");
 		</div>
 
 <?php
-	$query = mysql_query("select * from db_content where category='physics' order by id desc");
-	if(mysql_affected_rows() == 0){
+	$query = mysqli_query($link, "select * from db_content where category='physics' order by id desc");
+	if(mysqli_affected_rows() == 0){
 		echo "<h2 style='color:white; font-family: comic-sans'> Belum ada postingan di categori ini.</h2>";
 	}
-		while($q = mysql_fetch_array($query)){
+		while($q = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 			$judul = $q['judul'];
 			$isi = $q['isi'];
 			$tanggal = $q['tanggal'];
 			$user = $q['user'];
 			$id = $q['id'];
 			$category = $q['category'];
+			$pquery = mysqli_query($link, "SELECT * FROM pageview WHERE page='$id'");
 
 			// function readmore
 				$string = strip_tags($isi);
@@ -105,11 +106,11 @@ $query = mysql_query("select * from db_content order by id asc");
 				</p>
 				<br />
 				<hr>
-				<h4>Viewed <?php echo mysql_num_rows($pquery); ?> times <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
+				<h4>Viewed <?php echo mysqli_num_rows($pquery); ?> times <?php for($i=0;$i<60;$i++){ echo "&nbsp"; } ?> <?php echo $tanggal; ?></h4>
 <?php
 // menghitung komentar
-	$komen = mysql_query("select * from db_comment where id_article=$id");
-	$jumlah_komen = mysql_num_rows($komen);
+	$komen = mysqli_query($link, "select * from db_comment where id_article=$id");
+	$jumlah_komen = mysqli_num_rows($komen);
 ?>
 				<h5><?php echo "Category: " . $category; ?></h4> 
 				<h4><?php echo $jumlah_komen; ?> Comments</h4>

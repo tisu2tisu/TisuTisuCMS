@@ -13,17 +13,17 @@
 			<form action="tambah_user_aunt.php" method="post">
 				<tr>
 					<td>Username : </td>
-					<td><input type="text" name="user" /></td>
+					<td><input type="text" name="user" required/></td>
 				</tr>
 
 				<tr>
 					<td>Password : </td>
-					<td><input type="text" name="pass" /></td>
+					<td><input type="text" name="pass" required/></td>
 				</tr>
 
 				<tr>
 					<td>Email : </td>
-					<td><input type="email" name="email" /></td>
+					<td><input type="email" name="email" required/></td>
 				</tr>
 
 				<tr>

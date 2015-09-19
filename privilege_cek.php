@@ -3,8 +3,8 @@
 
 	$user = $_SESSION['username'];
 	$userid = $_GET['userid'];
-	$query = mysql_query("select * from db_id where user='$user'");
-	$q = mysql_fetch_array($query);
+	$query = mysqli_query($link, "select * from db_id where user='$user'");
+	$q = mysqli_fetch_array($query, MYSQLI_ASSOC);
 	$word = $_GET['action'];
 
 	if($q['privilege'] == $user){

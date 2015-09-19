@@ -3,9 +3,9 @@
 	require('privilege.php');
 	$id = $_GET['userid'];
 
-	if($query = mysql_query("DELETE FROM db_id WHERE id='$id'")){
+	if($query = mysqli_query($link, "DELETE FROM db_id WHERE id='$id'")){
 		header('location:admin.php?value=');
 	} else {
-		die('Error:' . mysql_error());
+		die('Error:' . mysqli_error());
 	}
 ?>

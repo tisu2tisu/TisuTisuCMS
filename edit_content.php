@@ -3,16 +3,16 @@
 	require_once('asset/login_cek.php');
 	require('asset/mysql_con.php');
 	$id = $_GET['id'];
-	$query = mysql_query("select * from db_content where id='$id'");
+	$query = mysqli_query($link, "select * from db_content where id='$id'");
 
-	if($q = mysql_fetch_array($query)){
+	if($q = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 		$judul = $q['judul'];
 		$user = $q['user'];
 		$isi = $q['isi'];
 		$tanggal = $q['tanggal'];
 		$category = $q['category'];
 	} else {
-		die('Error : ' . mysql_query());
+		die('Error : ' . mysqli_error());
 	}
 ?>
 <html>
